@@ -14,5 +14,3 @@ void Action(string cmd, bool waitForSuccess);
 
 // Manages the entire process of setting up a character.
 void SetUpCharacter(string name, string bodyType, string clothing, string hairStyle, string hairColor, string position)
-
-// Manages the entire process of setting up a
