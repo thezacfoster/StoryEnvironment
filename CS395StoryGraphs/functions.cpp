@@ -3,21 +3,21 @@
 using namespace std;
 
 // Pauses execution in the experience manager until the given input message is received from Camelot
-void WaitFor(string msg)
+void Common::WaitFor(string msg)
 {
 	string i;
 	do { getline(cin, i); } while (i != msg); // keep reading until matching msg is received
 }
 
 // Sends a given command to Camelot. If waitForSuccess is true, pauses the experience manager's execution until the command succeeds.
-void Action(string cmd, bool waitForSuccess)
+void Common::Action(string cmd, bool waitForSuccess)
 {
 	cout << ("start " + cmd) << endl;
 	if (waitForSuccess) WaitFor("succeeded " + cmd);
 }
 
 // Manages the entire process of setting up a character, including appearance, clothing, and position.
-void SetUpCharacter(string name, string bodyType, string clothing, string hairStyle, string hairColor, string position)
+void Common::SetUpCharacter(string name, string bodyType, string clothing, string hairStyle, string hairColor, string position)
 {
 	Action("CreateCharacter(" + name + ", " + bodyType + ")", true);
 	if (clothing != "") Action("SetClothing(" + name + ", " + clothing + ")", true);
@@ -27,7 +27,7 @@ void SetUpCharacter(string name, string bodyType, string clothing, string hairSt
 }
 
 // Prepares dialog display between two given characters. If walkTo is true, the first character will walk to the second's position.
-void SetUpDialog(string firstChar, string secondChar, bool walkTo) 
+void Common::SetUpDialog(string firstChar, string secondChar, bool walkTo)
 {
 	Action("DisableInput()", true);
 
@@ -42,10 +42,10 @@ void SetUpDialog(string firstChar, string secondChar, bool walkTo)
 }
 
 // Establishes the text and response choices in the current dialog interaction.
-void SetUpDialogText(string message, string responseKey1, string response1, string responseKey2, string response2);
+void Common::SetUpDialogText(string message, string responseKey1, string response1, string responseKey2, string response2);
 
 // Causes given character to exit one location and enter another, allowing transitions between Camelot Places.
-void Transition(string character, string exit, string entrance)
+void Common::Transition(string character, string exit, string entrance)
 {
 	Action("DisableInput()", true);
 	Action("Exit(" + character + ", " + exit + ", true)", true);
@@ -54,7 +54,7 @@ void Transition(string character, string exit, string entrance)
 }
 
 // Establishes player control of the given character when the "Start" button is pressed at the main menu.
-void PlayerStart(string playerChar)
+void Common::PlayerStart(string playerChar)
 {
 	Action("SetCameraFocus(" + playerChar + ")", true);
 	Action("HideMenu()", true);
@@ -62,7 +62,7 @@ void PlayerStart(string playerChar)
 }
 
 // Causes given character to walk to given location.
-void WalkTo(string character, string location)
+void Common::WalkTo(string character, string location)
 {
 	Action("DisableInput()", true);
 	Action("WalkTo(" + character + ", " + location + ")", true);
@@ -70,7 +70,7 @@ void WalkTo(string character, string location)
 }
 
 // Clears and closes the narration box.
-void CloseNarration()
+void Common::CloseNarration()
 {
 	Action("HideList()", true);
 	Action("ClearList()", true);

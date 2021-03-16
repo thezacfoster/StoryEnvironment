@@ -5,7 +5,7 @@ Story::Story()
 {
 	RunSetup();
 	// uncomment this and insert title when applicable:
-	// Action("SetTitle(Insert Title Here)", true);
+	// Common::Action("SetTitle(Insert Title Here)", true);
 	Run();
 	// uncomment this and insert initial location
 	// SetCurrentLocation("insert first location name here");
@@ -18,7 +18,7 @@ void Story::RunSetup()
 	// SetupLocation2("location2");
 	// ...
 
-	Action("ShowMenu()", true); // displays title menu
+	Common::Action("ShowMenu()", true); // displays title menu
 }
 
 void Story::Run()
