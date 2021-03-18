@@ -7,14 +7,13 @@ Story::Story()
 	// uncomment this and insert title when applicable:
 	// Common::Action("SetTitle(Insert Title Here)", true);
 	Run();
-	// uncomment this and insert initial location
-	// SetCurrentLocation("insert first location name here");
+	SetCurrentLocation(Cottage); // Cottage is the initial location
 }
 
 void Story::RunSetup() 
 {
 	// ----Call location setup functions----
-	// SetupLocation1("location1");
+	SetupCottage("Cottage");
 	// SetupLocation2("location2");
 	// ...
 
@@ -25,27 +24,50 @@ void Story::Run()
 {
 	while (true)
 	{
-		/*
-		location = GetLocation();
+		Location location = this->GetCurrentLocation();
 		switch (location)
 		{
-			case "location1":
-				RunLocation1();
+			case Cottage:
+				RunCottage();
 				break;
+			/*
 			case "location2":
 				RunLocation2();
 				break;
+			*/
 		}
-		*/
+		
 	}
 }
 
-void Story::SetCurrentLocation(string newLocation)
+void Story::SetupCottage(string name)
+{
+	// ----Location Setup----
+	Common::Action("CreatePlace(" + name + ", Cottage)", true);
+
+	// ----Character Setup----
+	Common::SetUpCharacter("Player", "D", "Peasant", "Spiky", "Brown", "Cottage");
+
+	// ----Items and Placement----
+
+	// ----Interaction Setup----
+	Common::Action("EnableIcon(Open_Door, Open, " + name + ".Door, Exit the Cottage, true)", true);
+	
+	// ----Furniture Config----
+	Common::Action("HideFurniture(" + name + ".Chest)", true);
+}
+
+void Story::RunCottage()
+{
+
+}
+
+void Story::SetCurrentLocation(Location newLocation)
 {
 	this->CurrentLocation = newLocation;
 }
 
-string Story::GetCurrentLocation()
+Story::Location Story::GetCurrentLocation()
 {
 	return this->CurrentLocation;
 }

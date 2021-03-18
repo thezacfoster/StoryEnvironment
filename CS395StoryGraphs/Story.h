@@ -6,26 +6,29 @@ using namespace std;
 class Story 
 {
 public:
+	enum Location { Cottage, Market, Camp, Crossroads };
+
 	Story(); // Constructor
 	void RunSetup();
 	void Run();
 
 	// ----Functions for setting up each location in the story----
-	// bool SetupLocation1(string name);
-	// bool SetupLocation2(string name);
+	void SetupCottage(string name);
+	// void SetupLocation2(string name);
 	// ...
 
 	// ----Functions for executing each location in the story----
-	// void RunLocation1();
+	void RunCottage();
 	// void RunLocation2();
 	// ...
 
 	// Other Set/Get functions
-	void SetCurrentLocation(string newLocation);
-	string GetCurrentLocation();
+	void SetCurrentLocation(Location newLocation);
+	Location GetCurrentLocation();
+
 
 private:
-	string CurrentLocation; // The name of the current location the player is in.
+	Location CurrentLocation; // The name of the current location the player is in.
 
 	// ----Variables for each instantiated location----
 	// Type1 location1;
