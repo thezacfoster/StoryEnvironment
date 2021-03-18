@@ -1,4 +1,5 @@
 #include "functions.h"
+#include <sstream>
 
 using namespace std;
 
@@ -75,4 +76,20 @@ void Common::CloseNarration()
 	Action("HideList()", true);
 	Action("ClearList()", true);
 	Action("EnableInput()", true);
+}
+
+// Takes an input string and splits it into a vector containing its words.
+vector<string> Common::SplitInput(string input)
+{
+	vector<string> output; // vector of words to be returned
+	string word; // temporarily stores a single word
+
+	// read one word at a time and add to vector
+	istringstream inputStream(input);
+	while (getline(inputStream, word, ' '))
+	{
+		output.push_back(word);
+	}
+
+	return output;
 }

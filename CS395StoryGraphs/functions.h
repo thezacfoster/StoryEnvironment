@@ -3,6 +3,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -34,4 +35,7 @@ namespace Common
 
 	// Clears and closes the narration box.
 	void CloseNarration();
+
+	// Takes an input string and splits it into a vector containing its words.
+	vector<string> SplitInput(string input);
 }
