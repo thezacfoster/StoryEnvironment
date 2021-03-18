@@ -33,9 +33,13 @@ namespace Common
 	// Causes given character to walk to given location.
 	void WalkTo(string character, string location);
 
-	// Clears and closes the narration box.
-	void CloseNarration();
+	// Clears and closes list views, such as inventory screens.
+	void CloseList();
 
 	// Takes an input string and splits it into a vector containing its words.
 	vector<string> SplitInput(string input);
+
+	// Checks common keywords for the most frequent commands from Camelot and performs the appropriate action if found. 
+	// Returns true if the given camelot command was for a common command.
+	bool CheckCommonKeywords(vector<string> input, string playerName);
 }

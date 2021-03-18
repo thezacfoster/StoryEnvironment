@@ -70,8 +70,8 @@ void Common::WalkTo(string character, string location)
 	Action("EnableInput()", true);
 }
 
-// Clears and closes the narration box.
-void Common::CloseNarration()
+// Clears and closes list views, such as inventory screens.
+void Common::CloseList()
 {
 	Action("HideList()", true);
 	Action("ClearList()", true);
@@ -92,4 +92,81 @@ vector<string> Common::SplitInput(string input)
 	}
 
 	return output;
+}
+
+// Checks common keywords for the most frequent commands from Camelot and performs the appropriate action if found. 
+// Returns true if the given camelot command was for a common command.
+bool Common::CheckCommonKeywords(vector<string> input, string playerName)
+{
+	bool keywordFound = true; // value to be returned. defaults to true, becomes false if command was not common
+
+	if (input.size() < 2) return false; // vector is invalid if it has less than two words
+
+	// if the command is under the "Selected" keyword
+	if (input[2] == "Selected")
+	{
+		// occurs when the player clicks Start on the main menu
+		if (input[3] == "Start")
+		{
+			PlayerStart(playerName);
+			Action("EnableInput()", true);
+		}
+
+		// occurs when the player unpauses the game
+		else if (input[3] == "Resume")
+		{
+			Action("HideMenu()", true);
+			Action("EnableInput()", true);
+		}
+
+		// occurs when the player selects Credits at the menu
+		// (fill in later)
+
+		// occurs when the player selects Quit at the menu
+		else if (input[3] == "Quit")
+			Action("Quit()", true);
+
+		// occurs when dialog ends
+		else if (input[3] == "end")
+			Action("HideDialog()", true);
+
+		// occurs if the keyword was "Selected" but the option selected was something custom, such as a dialog choice
+		else keywordFound = false;
+	}
+
+	// if the command is under the "Key" keyword
+	else if (input[2] == "Key")
+	{
+		// occurs if the player presses the inventory key
+		if (input[3] == "Inventory")
+		{
+			Action("ClearList()", true);
+			// (fill in later once inventory management is added
+		}
+
+		// occurs if the player presses the pause key
+		else if (input[3] == "Pause")
+		{
+			Action("DisableInput()", true);
+			Action("ShowMenu()", true);
+		}
+
+		else keywordFound = false;
+	}
+
+	// if the command is under the "Close" keyword
+	else if (input[2] == "Close")
+	{
+		// occurs when the player closes a narration window
+		if (input[3] == "Narration")
+			Action("HideNarration()", true);
+
+		// occurs when the player closes an inventory screen. there should not be any other commands under the "Close" keyword
+		else CloseList();
+	}
+
+	// if the given command is not in this set of common commands
+	else keywordFound == false;
+
+	return keywordFound;
 }

@@ -36,7 +36,7 @@ void Story::Run()
 				break;
 			*/
 		}
-		
+
 	}
 }
 
@@ -66,7 +66,7 @@ void Story::RunCottage()
 		string input; // stores a single message from Camelot
 		getline(cin, input);
 
-
+		vector<string> inputWords = Common::SplitInput(input); // split camelot message into a vector containing its words
 	}
 }
 
