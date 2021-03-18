@@ -59,7 +59,15 @@ void Story::SetupCottage(string name)
 
 void Story::RunCottage()
 {
+	// ----Cottage Execution Loop----
+	Location location = this->GetCurrentLocation();
+	while (location == Cottage)
+	{
+		string input; // stores a single message from Camelot
+		getline(cin, input);
 
+
+	}
 }
 
 void Story::SetCurrentLocation(Location newLocation)
