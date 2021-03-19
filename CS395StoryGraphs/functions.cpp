@@ -18,12 +18,14 @@ void Common::Action(string cmd, bool waitForSuccess)
 }
 
 // Manages the entire process of setting up a character, including appearance, clothing, and position.
-void Common::SetUpCharacter(string name, string bodyType, string clothing, string hairStyle, string hairColor, string position)
+void Common::SetUpCharacter(string name, string bodyType, string clothing, string hairStyle, string hairColor, string skinColor, string eyeColor, string position)
 {
 	Action("CreateCharacter(" + name + ", " + bodyType + ")", true);
 	if (clothing != "") Action("SetClothing(" + name + ", " + clothing + ")", true);
 	if (hairStyle != "") Action("SetHairStyle(" + name + ", " + hairStyle + ")", true);
 	if (hairColor != "") Action("SetHairColor(" + name + ", " + hairColor + ")", true);
+	if (skinColor != "") Action("SetSkinColor(" + name + ", " + skinColor + ")", true);
+	if (eyeColor != "") Action("SetEyeColor(" + name + ", " + eyeColor + ")", true);
 	if (position != "") Action("SetPosition(" + name + ", " + position + ")", true);
 }
 
@@ -142,8 +144,7 @@ bool Common::CheckCommonKeywords(vector<string> input, string playerName)
 		// occurs if the player presses the inventory key
 		if (input[2] == "Inventory")
 		{
-			Action("ClearList()", true);
-			// (fill in later once inventory management is added
+			ShowInv(playerName);
 		}
 
 		// occurs if the player presses the pause key
@@ -171,4 +172,15 @@ bool Common::CheckCommonKeywords(vector<string> input, string playerName)
 	else keywordFound == false;
 
 	return keywordFound;
+}
+
+// Displays the given character's inventory.
+void Common::ShowInv(string person/*, vector<string> inventory*/) 
+{
+	Action("ClearList()", true);
+	/*
+	for (string item : inventory)
+		Action("AddToList(" + item + ")", true);
+	*/
+	Action("ShowList(" + person + ")", true);
 }

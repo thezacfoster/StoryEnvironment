@@ -16,7 +16,7 @@ namespace Common
 	void Action(string cmd, bool waitForSuccess);
 
 	// Manages the entire process of setting up a character, including appearance, clothing, and position.
-	void SetUpCharacter(string name, string bodyType, string clothing, string hairStyle, string hairColor, string position);
+	void SetUpCharacter(string name, string bodyType, string clothing, string hairStyle, string hairColor, string skinColor, string eyeColor, string position);
 
 	// Prepares dialog display between two given characters. If walkTo is true, the first character will walk to the second's position.
 	void SetUpDialog(string firstChar, string secondChar, bool walkTo);
@@ -42,4 +42,8 @@ namespace Common
 	// Checks common keywords for the most frequent commands from Camelot and performs the appropriate action if found. 
 	// Returns true if the given camelot command was for a common command.
 	bool CheckCommonKeywords(vector<string> input, string playerName);
+
+	// Displays the given character's inventory.
+	void ShowInv(string person);
+	//void ShowInv(string person, vector<string> inventory); use this version once we get the logic for inventories added
 }

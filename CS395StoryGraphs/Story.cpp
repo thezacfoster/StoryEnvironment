@@ -48,7 +48,7 @@ void Story::SetupCottage(string name)
 	Common::Action("CreatePlace(" + name + ", Cottage)", true);
 
 	// ----Character Setup----
-	Common::SetUpCharacter(playerName, "D", "Peasant", "Spiky", "Brown", "Cottage");
+	Common::SetUpCharacter(playerName, "D", "Peasant", "Spiky", "Black", "9", "brown", "Cottage");
 
 	// ----Items and Placement----
 
