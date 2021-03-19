@@ -26,7 +26,7 @@ public:
 	void SetCurrentLocation(Location newLocation);
 	Location GetCurrentLocation();
 
-
+	string playerName;
 private:
 	Location CurrentLocation; // The name of the current location the player is in.
 

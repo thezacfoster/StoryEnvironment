@@ -3,11 +3,13 @@
 
 Story::Story() 
 {
+	playerName = "Player";
+	SetCurrentLocation(Cottage); // Cottage is the initial location
 	RunSetup();
 	// uncomment this and insert title when applicable:
 	// Common::Action("SetTitle(Insert Title Here)", true);
 	Run();
-	SetCurrentLocation(Cottage); // Cottage is the initial location
+	
 }
 
 void Story::RunSetup() 
@@ -46,7 +48,7 @@ void Story::SetupCottage(string name)
 	Common::Action("CreatePlace(" + name + ", Cottage)", true);
 
 	// ----Character Setup----
-	Common::SetUpCharacter("Player", "D", "Peasant", "Spiky", "Brown", "Cottage");
+	Common::SetUpCharacter(playerName, "D", "Peasant", "Spiky", "Brown", "Cottage");
 
 	// ----Items and Placement----
 
@@ -67,6 +69,18 @@ void Story::RunCottage()
 		getline(cin, input);
 
 		vector<string> inputWords = Common::SplitInput(input); // split camelot message into a vector containing its words
+
+		// execute common commands
+		bool commandWasCommon = Common::CheckCommonKeywords(inputWords, playerName);
+
+		// non-common commands:
+		if (!commandWasCommon)
+		{
+			if (inputWords[2] == "Open_Door")
+			{
+				// do transition
+			}
+		}
 	}
 }
 
