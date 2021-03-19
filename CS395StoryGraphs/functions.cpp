@@ -169,7 +169,7 @@ bool Common::CheckCommonKeywords(vector<string> input, string playerName)
 	}
 
 	// if the given command is not in this set of common commands
-	else keywordFound == false;
+	else keywordFound = false;
 
 	return keywordFound;
 }

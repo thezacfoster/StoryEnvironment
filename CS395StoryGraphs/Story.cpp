@@ -16,8 +16,7 @@ void Story::RunSetup()
 {
 	// ----Call location setup functions----
 	SetupCottage("Cottage");
-	// SetupLocation2("location2");
-	// ...
+	SetupCrossroads("Crossroads");
 
 	Common::Action("ShowMenu()", true); // displays title menu
 }
@@ -32,13 +31,11 @@ void Story::Run()
 			case Cottage:
 				RunCottage();
 				break;
-			/*
-			case "location2":
-				RunLocation2();
+			
+			case Crossroads:
+				RunCrossroads();
 				break;
-			*/
 		}
-
 	}
 }
 
@@ -59,6 +56,22 @@ void Story::SetupCottage(string name)
 	Common::Action("HideFurniture(" + name + ".Chest)", true);
 }
 
+void Story::SetupCrossroads(string name)
+{
+	// ----Location Setup----
+	Common::Action("CreatePlace(" + name + ", Bridge)", true);
+
+	// ----Character Setup----
+	
+
+	// ----Items and Placement----
+
+	// ----Interaction Setup----
+	
+
+	// ----Furniture Config----
+}
+
 void Story::RunCottage()
 {
 	// ----Cottage Execution Loop----
@@ -76,9 +89,36 @@ void Story::RunCottage()
 		// non-common commands:
 		if (!commandWasCommon)
 		{
-			if (inputWords[2] == "Open_Door")
+			if (inputWords[1] == "Open_Door")
 			{
-				// do transition
+				Common::Transition(playerName, "Cottage.Door", "Crossroads.NorthEnd");
+				SetCurrentLocation(Crossroads);
+			}
+		}
+	}
+}
+
+void Story::RunCrossroads()
+{
+	// ----Crossroads Execution Loop----
+	Location location = this->GetCurrentLocation();
+	while (location == Crossroads)
+	{
+		string input; // stores a single message from Camelot
+		getline(cin, input);
+
+		vector<string> inputWords = Common::SplitInput(input); // split camelot message into a vector containing its words
+
+		// execute common commands
+		bool commandWasCommon = Common::CheckCommonKeywords(inputWords, playerName);
+
+		// non-common commands
+		if (!commandWasCommon)
+		{
+			if (input == "input arrived Player position Crossroads.NorthEnd")
+			{
+				Common::Transition(playerName, "Crossroads.NorthEnd", "Cottage.Door");
+				SetCurrentLocation(Cottage);
 			}
 		}
 	}

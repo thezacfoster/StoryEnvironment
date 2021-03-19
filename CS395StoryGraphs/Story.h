@@ -14,11 +14,12 @@ public:
 
 	// ----Functions for setting up each location in the story----
 	void SetupCottage(string name);
-	// void SetupLocation2(string name);
+	void SetupCrossroads(string name);
 	// ...
 
 	// ----Functions for executing each location in the story----
 	void RunCottage();
+	void RunCrossroads();
 	// void RunLocation2();
 	// ...
 
