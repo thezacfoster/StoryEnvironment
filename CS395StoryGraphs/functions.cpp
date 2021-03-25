@@ -184,3 +184,11 @@ void Common::ShowInv(string person/*, vector<string> inventory*/)
 	*/
 	Action("ShowList(" + person + ")", true);
 }
+
+// Causes a character to rob another
+void Common::Rob(string person, string object, string target)
+{
+	Action("WalkTo(" + person + ", " + target + ")", true);
+	Action("Take(" + person + ", " + object + ", " + target + ")", true);
+	Action("Pocket(" + person + ", " + object + ")", true);
+}

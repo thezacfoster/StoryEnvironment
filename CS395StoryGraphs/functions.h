@@ -46,4 +46,6 @@ namespace Common
 	// Displays the given character's inventory.
 	void ShowInv(string person);
 	//void ShowInv(string person, vector<string> inventory); use this version once we get the logic for inventories added
+
+	void Rob(string person, string object, string target);
 }
